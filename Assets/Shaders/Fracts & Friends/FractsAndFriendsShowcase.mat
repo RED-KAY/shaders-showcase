@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UnlitTextureShowcase
-  m_Shader: {fileID: 4800000, guid: 37993ecd213ef244ea949fed85b5215e, type: 3}
+  m_Name: FractsAndFriendsShowcase
+  m_Shader: {fileID: 4800000, guid: bd30c2f63db213941b3d3bbaf6211e64, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: ee0050fbfc1f1f141b17513ad5a77f40, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7df5758ce5006654980e1a8c689183ab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -71,6 +71,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Overlay:
+        m_Texture: {fileID: 2800000, guid: 5322ebde1f7763146b27793d6bf90759, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
