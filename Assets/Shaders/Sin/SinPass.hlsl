@@ -42,10 +42,12 @@ float4 Sin_Fragment (Varryings IN) : SV_TARGET {
 	float time = _Time.y;
 	float speed = 4;
 
-	float t1 = remap(sin(uv.y * 400.0 + time * 10.0), -1.0, 1.0, 0.85, 1.0);
-	float t2 = remap(sin(uv.y * 50.0 - time * 2.0), -1.0, 1.0, 0.85, 1.0);
+	float t1 = remap(sin(uv.y * 400.0 + time * 10.0), -1.0, 1.0, 0.7, 1.0);
+	float t2 = remap(sin(uv.y * 50.0 - time * 2.0), -1.0, 1.0, 0.7, 1.0);
 	
 	color.xyz = baseMap * t1 * t2;
+	//color.xyz = t1 * t2;
+	
 	return float4(color, 1);
 }
 
