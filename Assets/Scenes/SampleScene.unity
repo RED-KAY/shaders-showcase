@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d32de36200b0eb4d95b5c19f6fa177f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shaderMaterial: {fileID: 2100000, guid: fd8eb4e9bb8739140bb83bf4a91da562, type: 2}
+  _shaderMaterial: {fileID: 2100000, guid: 3e2f8dfacdc9ae9468c14e7c45dd085f, type: 2}
   _meshDistanceThreshold: 0
   _debug: 0
 --- !u!23 &2065332791
