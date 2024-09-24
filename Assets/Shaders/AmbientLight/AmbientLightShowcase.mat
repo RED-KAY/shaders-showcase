@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SinShowcase
+  m_Name: AmbientLightShowcase
   m_Shader: {fileID: 4800000, guid: 8ad7607f79cd6bb41aec0cf712f6e875, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
