@@ -1,7 +1,14 @@
-#ifndef COMMON_PHONG_SPECULAR_PASS_INCLUDED
-#define COMMON_PHONG_SPECULAR_PASS_INCLUDED
+#ifndef COMMON_IBL_SPECULAR_FRESNEL_PASS_INCLUDED
+#define COMMON_IBL_SPECULAR_FRESNEL_PASS_INCLUDED
 
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+TEXTURECUBE(_SkyboxCubeMap);
+SAMPLER(sampler_SkyboxCubeMap);
+
+CBUFFER_START(UnityPerMaterial)
+	float4 _SkyboxCubeMap_ST;
+CBUFFER_END
 
 float inverseLerp(float v, float min, float max){
 	return (v - min) / (max - min);
@@ -20,6 +27,27 @@ float3 LinearToSRGB(float3 color)
     return sRGB;
 }
 
+half3 BoxProjectedCubemapDirection(half3 reflectionWS, float3 positionWS, float4 cubemapPositionWS, float4 boxMin, float4 boxMax)
+{
+    // Is this probe using box projection?
+    if (cubemapPositionWS.w > 0.0f)
+    {
+        float3 boxMinMax = (reflectionWS > 0.0f) ? boxMax.xyz : boxMin.xyz;
+        half3 rbMinMax = half3(boxMinMax - positionWS) / reflectionWS;
+
+        half fa = half(min(min(rbMinMax.x, rbMinMax.y), rbMinMax.z));
+
+        half3 worldPos = half3(positionWS - cubemapPositionWS.xyz);
+
+        half3 result = worldPos + reflectionWS * fa;
+        return result;
+    }
+    else
+    {
+        return reflectionWS;
+    }
+}
+
 
 struct Attributes{
 	float4 positionOS : POSITION;
@@ -34,7 +62,7 @@ struct Varryings{
 	float3 positionWS : VAR_POSITION;
 };
 
-Varryings PhongSpecular_Vertex (Attributes IN) {
+Varryings IBLSpecular_Fresnel_Vertex (Attributes IN) {
 	Varryings OUT; 
 	float3 positionWS = TransformObjectToWorld(IN.positionOS.xyz);
 	OUT.positionHCS = TransformWorldToHClip(positionWS);
@@ -45,14 +73,13 @@ Varryings PhongSpecular_Vertex (Attributes IN) {
 	return OUT;
 }
 	
-float4 PhongSpecular_Fragment (Varryings IN) : SV_TARGET {
+float4 IBLSpecular_Fresnel_Fragment (Varryings IN) : SV_TARGET {
 
 	float2 uv = IN.uv;
 	float3 color = {0,0,0};
 	float3 normal = normalize(IN.normalWS);
 
-	float3 baseColor;
-	baseColor.xyz = 0.5;
+	float3 baseColor = {0.2, 0.0, 0.005};
 
 	float3 lighting;
 	lighting.xyz = 0;
@@ -74,7 +101,7 @@ float4 PhongSpecular_Fragment (Varryings IN) : SV_TARGET {
 	float3 diffuse = dp * lightColor;
 
 	//Lambertian lighting model
-	lighting += ambientLighting * 0.1 + hemi * 0.3 + diffuse * 1.0;
+	lighting += ambientLighting * 0.1 + hemi * 0.1 + diffuse * 1.0;
 
 	//Phong Specular
 	float3 viewDir = normalize(_WorldSpaceCameraPos - IN.positionWS);
@@ -83,7 +110,18 @@ float4 PhongSpecular_Fragment (Varryings IN) : SV_TARGET {
 	phongValue = pow(abs(phongValue), 32);
 	float3 specular = {phongValue, phongValue, phongValue};
 
-	color = baseColor * lighting + specular;
+	//IBL SPECULAR
+	float3 iblCoord = normalize(reflect(-viewDir, normal));
+	float3 iblSample = SAMPLE_TEXTURECUBE(_SkyboxCubeMap, sampler_SkyboxCubeMap, iblCoord).xyz;
+	specular += iblSample * 0.1;
+
+	//FRESNEl
+	float3 fresnel = 1.0 - max(0, dot(viewDir, normal));
+	fresnel = pow(fresnel, 2);
+	specular *= fresnel;
+	//color = fresnel;
+
+	color = baseColor * lighting  + specular;
 
 	color = LinearToSRGB(color);
 
