@@ -1,4 +1,4 @@
-Shader "Custom/Ambient Light" {
+Shader "Custom/Lit/Ambient Light" {
 	
 	Properties {
 	}

@@ -1,4 +1,4 @@
-Shader "Custom/Fracts And Friends" {
+Shader "Custom/Unlit/Fracts And Friends" {
 	
 	Properties {
 	}

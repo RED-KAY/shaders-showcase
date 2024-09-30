@@ -1,4 +1,4 @@
-Shader "Custom/IBL Specular & Fresnel" {
+Shader "Custom/Lit/IBL Specular & Fresnel" {
 	
 	Properties {
 		_SkyboxCubeMap ("Cube Map", Cube) = "black" {}

@@ -1,4 +1,4 @@
-Shader "Custom/Unlit" {
+Shader "Custom/Unlit/Unlit" {
 	
 	Properties {
 		[MainColor] _BaseColor ("Base Color", Color) = (1,1,1,1)

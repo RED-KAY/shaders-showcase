@@ -1,4 +1,4 @@
-Shader "Custom/Phong Specular" {
+Shader "Custom/Lit/Phong Specular" {
 	
 	Properties {
 	}

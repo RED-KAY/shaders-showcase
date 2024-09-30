@@ -1,4 +1,4 @@
-Shader "Custom/CommonShaderFunctions" {
+Shader "Custom/Unlit/CommonShaderFunctions" {
 	
 	Properties {
 	}

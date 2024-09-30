@@ -1,4 +1,4 @@
-Shader "Custom/Lambertian Lighting" {
+Shader "Custom/Lit/Lambertian Lighting" {
 	
 	Properties {
 	}

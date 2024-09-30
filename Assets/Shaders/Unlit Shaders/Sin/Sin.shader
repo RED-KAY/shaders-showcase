@@ -1,4 +1,4 @@
-Shader "Custom/Sin" {
+Shader "Custom/Unlit/Sin" {
 	
 	Properties {
 		[MainTexture] _BaseMap ("Main Texture", 2D) = "white" {}

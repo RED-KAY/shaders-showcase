@@ -1,4 +1,4 @@
-Shader "Custom/UnlitTexture + Overlay" {
+Shader "Custom/Unlit/UnlitTexture + Overlay" {
 	
 	Properties {
 		[MainColor]		_BaseColor ("Base Color", Color) = (1,1,1,1)
