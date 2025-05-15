@@ -82,7 +82,7 @@ float4 CelShadingTexture_Fragment (Varryings IN) : SV_TARGET {
 	//dp *= step(0.5, dp);
 	//dp *= smoothstep(0.5, 0.505, dp);
 	//dp *= smoothstep(smoothstep(1,1, 1-dp), smoothstep(0.6, 0.60, 1-dp), dp);
-	dp *= lerp(0.5, 1.0, step(0.65, dp)) * step(0.5, dp);
+	dp *= lerp(0.6, 1.0, step(0.3, dp)) *  step(0.1, dp);
 
 	float3 diffuse = dp * lightColor;
 
@@ -101,7 +101,7 @@ float4 CelShadingTexture_Fragment (Varryings IN) : SV_TARGET {
 
 	//Lambertian lighting model
 	//lighting += ambientLighting * (fresnel + 0.1) + hemi * (fresnel + 0.3) + diffuse * 1.0;
-	lighting += ambientLighting * (fresnel + 0.5) + hemi * (fresnel + 0.3) + diffuse * 0.8;
+	lighting += ambientLighting * (fresnel + 0.1) + hemi * (fresnel + 0.9) + diffuse * 0.8;
 
 	color = baseColor * lighting  + specular;
 
