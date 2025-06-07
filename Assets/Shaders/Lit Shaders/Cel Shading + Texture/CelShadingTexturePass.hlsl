@@ -96,7 +96,7 @@ float4 CelShadingTexture_Fragment (Varryings IN) : SV_TARGET {
 
 	//FRESNEl
 	float3 fresnel = 1.0 - max(0, dot(viewDir, normal));
-	fresnel = pow(fresnel, 2);
+	fresnel = pow(fresnel,2);
 	fresnel *= step(0.7, fresnel);
 
 	//Lambertian lighting model
